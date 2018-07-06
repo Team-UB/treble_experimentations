@@ -44,9 +44,16 @@ elif [ "$rom" == "tub" ];then
 	repo init -u https://github.com/abun880007/android.git -b TUB-Oreo
 fi
 
+if [ -d .repo/local_manifests ] ;then
+	( cd .repo/local_manifests; git fetch; git checkout origin/$localManifestBranch)
+else
 	git clone https://github.com/abun880007/treble_manifest .repo/local_manifests -b $localManifestBranch
 fi
 
+if [ -z "$local_patches" ];then
+    if [ -d patches ];then
+        ( cd patches; git fetch; git reset --hard; git checkout origin/$localManifestBranch)
+    else
         git clone https://github.com/phhusson/treble_patches patches -b $localManifestBranch
     fi
 else
