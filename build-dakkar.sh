@@ -39,6 +39,7 @@ ROM types:
   aokp
   slim
   aex
+  tub
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -145,7 +146,12 @@ function get_rom_type() {
                 treble_generate="slim"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
-
+            tub)
+                mainrepo="https://github.com/abun880007/android.git"
+                mainbranch="TUB-Oreo"
+                localManifestBranch="android-8.1"
+                treble_generate="tub"
+                extra_make_options="WITHOUT_CHECK_API=true"
 
 
 
