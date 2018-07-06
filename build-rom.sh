@@ -44,16 +44,9 @@ elif [ "$rom" == "tub" ];then
 	repo init -u https://github.com/abun880007/android.git -b TUB-Oreo
 fi
 
-if [ -d .repo/local_manifests ] ;then
-	( cd .repo/local_manifests; git fetch; git reset --hard; git checkout origin/$localManifestBranch)
-else
 	git clone https://github.com/abun880007/treble_manifest .repo/local_manifests -b $localManifestBranch
 fi
 
-if [ -z "$local_patches" ];then
-    if [ -d patches ];then
-        ( cd patches; git fetch; git reset --hard; git checkout origin/$localManifestBranch)
-    else
         git clone https://github.com/phhusson/treble_patches patches -b $localManifestBranch
     fi
 else
@@ -67,7 +60,7 @@ rm -f .repo/local_manifests/replace.xml
 
 repo sync -c -j$jobs --force-sync
 rm -f device/*/sepolicy/common/private/genfs_contexts
-(cd device/phh/treble; git clean -fdx; bash generate.sh $rom)
+(cd device/phh/treble; bash generate.sh $rom)
 
 sed -i -e 's/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1610612736/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2147483648/g' device/phh/treble/phhgsi_arm64_a/BoardConfig.mk
 
