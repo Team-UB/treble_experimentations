@@ -54,7 +54,7 @@ Variants are dash-joined combinations of (in order):
 
 for example:
 
-* arm-aonly-vanilla-nosu
+* arm64-aonly-vanilla-nosu
 * arm64-ab-gapps-su
 EOF
 }
@@ -182,11 +182,8 @@ partition_layout_map[ab]=b
 
 declare -A gapps_selection_map
 gapps_selection_map[vanilla]=v
-gapps_selection_map[gapps]=g
-gapps_selection_map[go]=o
 
 declare -A su_selection_map
-su_selection_map[su]=S
 su_selection_map[nosu]=N
 
 function parse_variant() {
