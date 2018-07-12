@@ -41,13 +41,13 @@ elif [ "$rom" == "lineage" ];then
 elif [ "$rom" == "rr" ];then
 	repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b oreo
 elif [ "$rom" == "tub" ];then
-	repo init -u https://github.com/abun880007/android.git -b TUB-Oreo
+	repo init -u https://github.com/Team-UB/android.git -b TUB-Oreo
 fi
 
 if [ -d .repo/local_manifests ] ;then
-	( cd .repo/local_manifests; git fetch; git checkout origin/$localManifestBranch)
+	( cd .repo/local_manifests; git fetch; git checkout origin/TUB-Oreo)
 else
-	git clone https://github.com/abun880007/treble_manifest .repo/local_manifests -b $localManifestBranch
+	git clone https://github.com/team-ub/treble_manifest .repo/local_manifests -b TUB-Oreo
 fi
 
 if [ -z "$local_patches" ];then
