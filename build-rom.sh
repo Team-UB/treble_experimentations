@@ -41,7 +41,7 @@ elif [ "$rom" == "lineage" ];then
 elif [ "$rom" == "rr" ];then
 	repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b oreo
 elif [ "$rom" == "tub" ];then
-	repo init -u https://github.com/Team-UB/android.git -b TUB-Oreo
+	repo init -u https://github.com/Team-UB/android.git -b TUB-Oreo --depth=1
 fi
 
 if [ -d .repo/local_manifests ] ;then
