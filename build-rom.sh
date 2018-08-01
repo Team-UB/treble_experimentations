@@ -69,7 +69,7 @@ repo sync -c -j52 --force-sync
 rm -f device/*/sepolicy/common/private/genfs_contexts
 (cd device/phh/treble; bash generate.sh $rom)
 
-sed -i -e 's/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1610612736/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2147483648/g' device/phh/treble/phhgsi_arm64_a/BoardConfig.mk
+sed -i -e 's/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3000000000/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3000000000/g' device/phh/treble/phhgsi_arm64_a/BoardConfig.mk
 
 if [ -f vendor/rr/prebuilt/common/Android.mk ];then
     sed -i \
