@@ -89,7 +89,6 @@ buildVariant() {
     cp "$OUT"/system.img release/"$rom_fp"/tub-system-"$2".img
 }
 	#xz -c $OUT/system.img > release/$rom_fp/system-${2}.img.xz
-}
 
 repo manifest -r > release/$rom_fp/manifest.xml
 buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps
