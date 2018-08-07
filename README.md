@@ -5,9 +5,9 @@
 
 For example:
 
-    git clone https://github.com/abun880007/treble_experimentations
+    git clone https://github.com/Team-UB/treble_experimentations
     mkdir tub; cd tub
-    bash ../treble_experimentations/build-rom.sh android-8.1 tub
+    bash ../treble_experimentations/build-rom.sh android-9.0 tub
 
 ## More flexible build script
 

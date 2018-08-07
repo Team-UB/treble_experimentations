@@ -10,8 +10,8 @@ if [ -z "$USER" ];then
 fi
 export LC_ALL=C
 
-aosp="android-8.1.0_r41"
-phh="TUB-Oreo"
+aosp="android-9.0.0_r3" 
+phh="android-9.0.0_r1-phh"
 
 if [ "$release" == true ];then
     [ -z "$version" ] && exit 1
@@ -43,16 +43,7 @@ repo manifest -r > release/$rom_fp/manifest.xml
 bash "$originFolder"/list-patches.sh
 cp patches.zip release/$rom_fp/patches.zip
 
-buildVariant treble_arm64_avN-userdebug arm64-aonly-vanilla-nosu
-buildVariant treble_arm64_agS-userdebug arm64-aonly-gapps-su
-buildVariant treble_arm64_afS-userdebug arm64-aonly-floss-su
-
-buildVariant treble_arm64_bvN-userdebug arm64-ab-vanilla-nosu
-buildVariant treble_arm64_bgS-userdebug arm64-ab-gapps-su
-buildVariant treble_arm64_bfS-userdebug arm64-ab-floss-su
-
-buildVariant treble_arm_avN-userdebug arm-aonly-vanilla-nosu
-buildVariant treble_arm_aoS-userdebug arm-aonly-go-su
+buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps
 
 if [ "$release" == true ];then
     (

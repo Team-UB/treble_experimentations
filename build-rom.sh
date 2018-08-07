@@ -6,7 +6,7 @@ mkdir -p release/$rom_fp/
 set -e
 
 if [ "$#" -le 1 ];then
-	echo "Usage: $0 <android-8.1> <carbon|lineage|rr|tub> '# of jobs'"
+	echo "Usage: $0 <android-9.0> <carbon|lineage|rr|tub> '# of jobs'"
 	exit 0
 fi
 localManifestBranch=$1
@@ -37,17 +37,17 @@ rm -f .repo/local_manifests/replace.xml
 if [ "$rom" == "carbon" ];then
 	repo init -u https://github.com/CarbonROM/android -b cr-6.1
 elif [ "$rom" == "lineage" ];then
-	repo init -u https://github.com/LineageOS/android.git -b lineage-15.1
+	repo init -u https://github.com/LineageOS/android.git -b lineage-16.0
 elif [ "$rom" == "rr" ];then
 	repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b oreo
 elif [ "$rom" == "tub" ];then
-	repo init -u https://github.com/Team-UB/android.git -b TUB-Oreo --depth=1
+	repo init -u https://github.com/Team-UB/android.git -b TUB-Pie --depth=1
 fi
 
 if [ -d .repo/local_manifests ] ;then
-	( cd .repo/local_manifests; git fetch; git checkout origin/TUB-Oreo)
+	( cd .repo/local_manifests; git fetch; git checkout origin/TUB-Pie)
 else
-	git clone https://github.com/team-ub/treble_manifest .repo/local_manifests -b TUB-Oreo
+	git clone https://github.com/team-ub/treble_manifest .repo/local_manifests -b TUB-Pie
 fi
 
 if [ -z "$local_patches" ];then
