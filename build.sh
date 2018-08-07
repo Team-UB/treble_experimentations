@@ -10,7 +10,7 @@ if [ -z "$USER" ];then
 fi
 export LC_ALL=C
 
-aosp="android-8.1.0_r41"
+aosp="android-8.1.0_r43"
 phh="TUB-Oreo"
 
 if [ "$release" == true ];then
