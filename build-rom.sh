@@ -54,7 +54,7 @@ if [ -z "$local_patches" ];then
     if [ -d patches ];then
         ( cd patches; git fetch; git reset --hard; git checkout origin/$localManifestBranch)
     else
-        git clone https://github.com/phhusson/treble_patches patches -b $localManifestBranch
+        git clone https://github.com/Team-UB/treble_patches patches -b TUB-Pie
     fi
 else
     rm -Rf patches
