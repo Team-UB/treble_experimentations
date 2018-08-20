@@ -10,8 +10,13 @@ if [ -z "$USER" ];then
 fi
 export LC_ALL=C
 
-aosp="android-9.0.0_r3" 
-phh="android-9.0.0_r1-phh"
+aosp="android-8.1.0_r43"
+phh="android-8.1"
+
+if [ "$1" == "android-9.0" ];then
+    aosp="android-9.0.0_r3"
+    phh="android-9.0"
+fi
 
 if [ "$release" == true ];then
     [ -z "$version" ] && exit 1
@@ -44,6 +49,7 @@ bash "$originFolder"/list-patches.sh
 cp patches.zip release/$rom_fp/patches.zip
 
 buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps
+[ "$1" != "android-9.0" ] && buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps
 
 if [ "$release" == true ];then
     (
@@ -54,7 +60,9 @@ if [ "$release" == true ];then
         source venv/bin/activate
         pip install -r $originFolder/release/requirements.txt
 
-        python $originFolder/release/push.py AOSP "$version" release/$rom_fp/
+        name="AOSP 8.1"
+        [ "$1" == "android-9.0" ] && name="AOSP 8.0"
+        python $originFolder/release/push.py "$name" "$version" release/$rom_fp/
         rm -Rf venv
     )
 fi
