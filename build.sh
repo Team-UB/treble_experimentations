@@ -6,13 +6,12 @@ mkdir -p release/$rom_fp/
 set -e
 
 if [ -z "$USER" ];then
-	export USER="$(id -un)"
+    export USER="$(id -un)"
 fi
 export LC_ALL=C
 
 aosp="android-9.0.0_r3"
-phh="android-9.0"
-fi
+phh="TUB-Pie"
 
 if [ "$release" == true ];then
     [ -z "$version" ] && exit 1
@@ -22,9 +21,9 @@ fi
 
 repo init -u https://android.googlesource.com/platform/manifest -b $aosp
 if [ -d .repo/local_manifests ] ;then
-	( cd .repo/local_manifests; git fetch; git reset --hard; git checkout origin/$phh)
+    ( cd .repo/local_manifests; git fetch; git reset --hard; git checkout origin/$phh)
 else
-	git clone https://github.com/team-ub/treble_manifest .repo/local_manifests -b $phh
+    git clone https://github.com/team-ub/treble_manifest .repo/local_manifests -b $phh
 fi
 repo sync -c -j 1 --force-sync
 (cd device/phh/treble; git clean -fdx; bash generate.sh)
@@ -33,19 +32,19 @@ repo sync -c -j 1 --force-sync
 . build/envsetup.sh
 
 buildVariant() {
-	lunch $1
-	make BUILD_NUMBER=$rom_fp installclean
-	make BUILD_NUMBER=$rom_fp -j8 systemimage
-	make BUILD_NUMBER=$rom_fp vndk-test-sepolicy
-	xz -c $OUT/system.img > release/$rom_fp/system-${2}.img.xz
+    lunch $1
+    make BUILD_NUMBER=$rom_fp installclean
+    make BUILD_NUMBER=$rom_fp -j8 systemimage
+    make BUILD_NUMBER=$rom_fp vndk-test-sepolicy
+    xz -c $OUT/system.img > release/$rom_fp/system-${2}.img.xz
 }
 
 repo manifest -r > release/$rom_fp/manifest.xml
 bash "$originFolder"/list-patches.sh
 cp patches.zip release/$rom_fp/patches.zip
 
-buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps
-[ "$1" != "android-9.0" ] && buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps
+buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps-nosu
+[ "$1" != "android-9.0" ] && buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps-nosu
 
 if [ "$release" == true ];then
     (
