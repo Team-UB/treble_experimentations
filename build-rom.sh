@@ -65,7 +65,7 @@ fi
 #We don't want to replace from AOSP since we'll be applying patches by hand
 rm -f .repo/local_manifests/replace.xml
 
-repo sync -c -j52 --force-sync
+repo sync -c -j20 --force-sync
 rm -f device/*/sepolicy/common/private/genfs_contexts
 (cd device/phh/treble; bash generate.sh $rom)
 
