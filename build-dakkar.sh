@@ -48,6 +48,7 @@ ROM types:
   aex
   tub
   slim
+  havoc
 
 Variants are dash-joined combinations of (in order):
 * processor type
@@ -170,7 +171,7 @@ function get_rom_type() {
                 treble_generate="aex"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
-            slim)
+           slim)
                 mainrepo="https://github.com/SlimRoms/platform_manifest.git"
                 mainbranch="or8.1"
                 localManifestBranch="android-8.1"
@@ -183,7 +184,13 @@ function get_rom_type() {
                 localManifestBranch="TUB-Pie"
                 treble_generate="tub"
                 extra_make_options="WITHOUT_CHECK_API=true"
-
+				;;
+	      havoc)
+                mainrepo="https://github.com/Havoc-OS/android_manifest.git"
+                mainbranch="pie"
+                localManifestBranch="android-9.0"
+                treble_generate="havoc"
+                extra_make_options="WITHOUT_CHECK_API=true"
 
 
         esac
