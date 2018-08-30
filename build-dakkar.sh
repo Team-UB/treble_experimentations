@@ -180,7 +180,7 @@ function get_rom_type() {
             tub)
                 mainrepo="https://github.com/Team-UB/android.git"
                 mainbranch="TUB-Pie"
-                localManifestBranch="android-9.0"
+                localManifestBranch="TUB-Pie"
                 treble_generate="tub"
                 extra_make_options="WITHOUT_CHECK_API=true"
 
@@ -269,6 +269,7 @@ function clone_or_checkout() {
 
     if [[ -d "$dir" ]];then
         (
+            echo "dir is " $1 "......and repo is " $2
             cd "$dir"
             git fetch
             git reset --hard
