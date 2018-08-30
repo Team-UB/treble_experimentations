@@ -178,8 +178,8 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
             tub)
-                mainrepo="https://github.com/abun880007/android.git"
-                mainbranch="TUB-Oreo"
+                mainrepo="https://github.com/Team-UB/android.git"
+                mainbranch="TUB-Pie"
                 localManifestBranch="android-9.0"
                 treble_generate="tub"
                 extra_make_options="WITHOUT_CHECK_API=true"
