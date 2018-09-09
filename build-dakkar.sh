@@ -17,8 +17,6 @@ elif [[ $(uname -s) = "Linux" ]];then
     jobs=$(nproc)
 fi
 
-## handle command line arguments
-read -p "Do you want to sync? (y/N) " choice
 
 function help() {
     cat <<EOF
@@ -370,12 +368,10 @@ if [[ $python == "3." ]]; then
 fi
 
 init_release
-if [[ $choice == *"y"* ]];then
 init_main_repo
 init_local_manifest
 init_patches
 sync_repo
-fi
 patch_things
 jack_env
 
