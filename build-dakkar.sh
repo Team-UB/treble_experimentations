@@ -1,4 +1,5 @@
 #!/bin/bash
+./prebuilts/sdk/tools/jack-admin start-server
 set -e
 
 if [ -z "$USER" ];then
