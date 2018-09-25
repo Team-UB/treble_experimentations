@@ -1,4 +1,5 @@
 #!/bin/bash
+export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8096m"
 ./prebuilts/sdk/tools/jack-admin start-server
 set -e
 
