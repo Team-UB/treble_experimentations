@@ -36,7 +36,7 @@ buildVariant() {
     make BUILD_NUMBER=$rom_fp installclean
     make BUILD_NUMBER=$rom_fp -j8 systemimage
     make BUILD_NUMBER=$rom_fp vndk-test-sepolicy
-    xz -c $OUT/system.img > release/$rom_fp/system-${2}.img.xz
+    xz -c $OUT/tub.system.img > release/$rom_fp/system-${2}.img.xz
 }
 
 repo manifest -r > release/$rom_fp/manifest.xml

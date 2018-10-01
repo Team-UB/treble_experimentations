@@ -71,10 +71,10 @@ rm -f device/*/sepolicy/common/private/genfs_contexts
 
 sed -i -e 's/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3000000000/BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3000000000/g' device/phh/treble/phhgsi_arm64_a/BoardConfig.mk
 
-if [ -f vendor/rr/prebuilt/common/Android.mk ];then
+if [ -f vendor/tub/prebuilt/common/Android.mk ];then
     sed -i \
         -e 's/LOCAL_MODULE := Wallpapers/LOCAL_MODULE := WallpapersRR/g' \
-        vendor/rr/prebuilt/common/Android.mk
+        vendor/tub/prebuilt/common/Android.mk
 fi
 
 bash "$(dirname "$0")/apply-patches.sh" patches

@@ -349,7 +349,7 @@ function build_variant() {
     make $extra_make_options BUILD_NUMBER="$rom_fp" installclean
     make $extra_make_options BUILD_NUMBER="$rom_fp" -j "$jobs" systemimage
     make $extra_make_options BUILD_NUMBER="$rom_fp" vndk-test-sepolicy
-    cp "$OUT"/system.img release/"$rom_fp"/tub-system-"$2".img
+    cp "$OUT"/system.img release/"$rom_fp"/tub.system."$2".img
 }
 
 function jack_env() {
