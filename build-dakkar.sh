@@ -359,6 +359,21 @@ function jack_env() {
     fi
 }
 
+function build_app() {
+    #get current git log id
+    APPID=$(git -C packages/apps/treble_app log --format="%H" -n1)
+    #check previous id
+    if [[ -e  "packages/apps/treble_app/OldId" ]]; then
+        OLDID=$(cat packages/apps/treble_app/OldId)
+    else
+        OLDID="0"
+    fi
+    if [[ "$APPID" != "$OLDID" ]]; then
+        bash packages/apps/treble_app/build.sh
+        cp -f packages/apps/treble_app/app.apk vendor/hardware_overlay/TrebleApp/app.apk
+        echo "$APPID" > "packages/apps/treble_app/OldId"
+    fi
+}
 parse_options "$@"
 get_rom_type "$@"
 get_variants "$@"
@@ -383,6 +398,7 @@ init_local_manifest
 init_patches
 sync_repo
 patch_things
+build_app
 jack_env
 
 . build/envsetup.sh
