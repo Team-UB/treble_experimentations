@@ -10,7 +10,7 @@ if [ -z "$USER" ];then
 fi
 export LC_ALL=C
 
-aosp="android-9.0.0_r12"
+aosp="android-9.0.0_r16"
 phh="TUB-Pie"
 
 if [ "$release" == true ];then
