@@ -1,39 +1,33 @@
-# How to build
+Team (UB) Modded Rom
 
-* clone this repository
-* call the build scripts from a separate directory
+Getting Started
 
-For example:
+To get started with Android/Team (UB), you'll need to get familiar with Git and Repo.
 
-    git clone https://github.com/Team-UB/treble_experimentations
-    mkdir tub; cd tub
-    bash ../treble_experimentations/build-rom.sh android-9.0 tub
+To initialize your local repository using the Team-UB trees, use a command like this:
 
-## More flexible build script
+repo init -u git://github.com/Team-UB/android.git -b TUB-Pie
 
-(this has been tested much less)
 
-  bash ../treble_experimentations/build-dakkar.sh tub \
-    arm-aonly-gapps-su \
-    arm64-ab-go-nosu
+Then to sync up:
+----------------
+bash
+repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 
-The script should provide a help message if you pass something it
-doesn't understand
 
-# Using Docker
+Finally to build:
+-----------------
+bash
+. build/envsetup.sh
+lunch tub_device_codename-userdebug
+mka tub -j$(nproc --all)
 
-clone this repository, then:
 
-    docker build -t treble docker/
-    
-    docker container create --name treble treble
-    
-    docker run -ti \
-        -v $(pwd):/treble \
-        -v $(pwd)/../treble_output:/treble_output \
-        -w /treble_output \
-        treble \
-        /bin/bash /treble/build-dakkar.sh rr \
-        arm-aonly-gapps-su \
-        arm64-ab-go-nosu
+Building Treble Rom for S9/S9+
+------------------------------
+mkdir tub; cd tub
+
+git clone https://github.com/Team-UB/treble_experimentations
+
+bash ../treble_experimentations/build-dakkar.sh tub arm64-aonly-gapps-nosu-user
 
