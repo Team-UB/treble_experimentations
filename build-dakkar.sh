@@ -203,8 +203,14 @@ function get_rom_type() {
                 localManifestBranch="android-9.0"
                 treble_generate="havoc"
                 extra_make_options="WITHOUT_CHECK_API=true"
-
-
+                ;;
+	    du)
+                mainrepo="https://github.com/DirtyUnicorns/android_manifest"
+                mainbranch="p9x"
+                localManifestBranch="android-9.0"
+                treble_generate="du"
+                extra_make_options="WITHOUT_CHECK_API=true"
+                ;;
         esac
         shift
     done
