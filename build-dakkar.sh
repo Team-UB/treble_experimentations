@@ -329,7 +329,7 @@ function init_patches() {
 }
 
 function sync_repo() {
-    repo sync -c -j "$jobs" --force-sync
+    repo sync -c -j "$jobs" -f --force-sync --no-tag --no-clone-bundle --optimized-fetch --prune
 }
 
 function patch_things() {
