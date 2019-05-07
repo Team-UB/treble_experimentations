@@ -46,8 +46,10 @@ cp patches.zip release/$rom_fp/patches.zip
 buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps-nosu
 [ "$1" != "android-9.0" ] && buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps-nosu
 
+if [ "$1" = "android-9.0" ];then
 buildVariant treble_a64_bvN-userdebug arm32_binder64-ab-vanilla-nosu
 buildVariant treble_a64_bgS-userdebug arm32_binder64-ab-gapps-su
+fi
 
 if [ "$release" == true ];then
     (
