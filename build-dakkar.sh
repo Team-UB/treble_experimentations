@@ -51,7 +51,7 @@ ROM types:
   tub
   slim
   havoc
-  komodos
+  komodo
   rebellion
   aquarios
 
@@ -204,7 +204,7 @@ function get_rom_type() {
                 extra_make_options="WITHOUT_CHECK_API=true"
 				;;
 	      havoc)
-	        mainrepo="https://github.com/Havoc-OS/android_manifest.git"
+                mainrepo="https://github.com/Havoc-OS/android_manifest.git"
                 mainbranch="pie"
                 localManifestBranch="android-9.0"
                 treble_generate="havoc"
@@ -217,11 +217,11 @@ function get_rom_type() {
                 treble_generate="du"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
-                komodos)
+                komodo)
                 mainrepo="https://github.com/KomodOS-Rom/platform_manifest.git"
                 mainbranch="pie"
                 localManifestBranch="android-9.0"
-                treble_generate="komodos"
+                treble_generate="komodo"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
 	   rebellion)
@@ -237,7 +237,13 @@ function get_rom_type() {
 		localManifestBranch="android-9.0"
 		treble_generate="aquarios"
 		extra_make_options="WITHOUT_CHECK_API=true"
-		;;		
+		;;
+	   aosmp)
+	   	mainrepo="https://gitlab.com/AOSmP/android_manifest.git"
+		mainbranch="pie"
+		localManifestBranch="android-9.0"
+		treble_generate="aosmp"
+		extra_make_options="WITHOUT_TREBLE_CHECK_API=true"
 	esac
         shift
     done
