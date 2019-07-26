@@ -404,6 +404,11 @@ function jack_env() {
     fi
 }
 
+function clean_build() {
+    make installclean
+    rm -rf "$OUT"
+}
+
 function build_app() {
     #get current git log id
     APPID=$(git -C packages/apps/treble_app log --format="%H" -n1)
@@ -451,3 +456,9 @@ jack_env
 for (( idx=0; idx < ${#variant_codes[*]}; idx++ )); do
     build_variant "${variant_codes[$idx]}" "${variant_names[$idx]}"
 done
+
+read -p "Do you want to clean? (y/N) " clean
+
+if [[ $clean == *"y"* ]];then 
+clean_build
+fi
