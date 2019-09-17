@@ -247,7 +247,7 @@ function get_rom_type() {
                 treble_generate="tub"
                 extra_make_options="WITHOUT_CHECK_API=true"
 				;;
-	      havoc)
+            havoc-pie)
                 mainrepo="https://github.com/Havoc-OS/android_manifest.git"
                 mainbranch="pie"
                 localManifestBranch="android-9.0"
@@ -262,7 +262,7 @@ function get_rom_type() {
                 treble_generate="du"
                 extra_make_options="WITHOUT_CHECK_API=true"
                 ;;
-                komodo)
+            komodo-pie)
                 mainrepo="https://github.com/KomodOS-Rom/platform_manifest.git"
                 mainbranch="pie"
                 localManifestBranch="android-9.0"
