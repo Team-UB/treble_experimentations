@@ -10,8 +10,8 @@ if [ -z "$USER" ];then
 fi
 export LC_ALL=C
 
-aosp="android-9.0.0_r47"
-phh="TUB-Pie"
+aosp="android-10.0.0_r3"
+phh="TUB-10"
 
 if [ "$release" == true ];then
     [ -z "$version" ] && exit 1
@@ -44,13 +44,13 @@ bash "$originFolder"/list-patches.sh
 cp patches.zip release/$rom_fp/patches.zip
 
 buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps-nosu
-[ "$1" != "android-9.0" ] && buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps-nosu
+[ "$1" != "android-10.0" ] && buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps-nosu
 rm -Rf out/target/product/phhgsi*
 rm -Rf out/target/product/phhgsi*
 rm -Rf out/target/product/phhgsi*
 rm -Rf out/target/product/phhgsi*
 
-if [ "$1" = "android-9.0" ];then
+if [ "$1" = "android-10.0" ];then
 buildVariant treble_a64_bvN-userdebug arm32_binder64-ab-vanilla-nosu
 buildVariant treble_a64_bgS-userdebug arm32_binder64-ab-gapps-su
 fi
@@ -65,8 +65,8 @@ if [ "$release" == true ];then
         source venv/bin/activate
         pip install -r $originFolder/release/requirements.txt
 
-        name="AOSP 9.0"
-        [ "$1" == "android-9.0" ] && name="AOSP 9.0"
+        name="AOSP 10.0"
+        [ "$1" == "android-10.0" ] && name="AOSP 10.0"
         python $originFolder/release/push.py "$name" "$version" release/$rom_fp/
         rm -Rf venv
     )
