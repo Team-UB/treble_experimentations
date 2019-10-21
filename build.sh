@@ -10,7 +10,7 @@ if [ -z "$USER" ];then
 fi
 export LC_ALL=C
 
-aosp="android-10.0.0_r5"
+aosp="android-10.0.0_r9"
 phh="TUB-10"
 
 if [ "$release" == true ];then
@@ -45,15 +45,6 @@ cp patches.zip release/$rom_fp/patches.zip
 
 buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps-nosu
 [ "$1" != "android-10.0" ] && buildVariant treble_arm64_agN-userdebug arm64-aonly-gapps-nosu
-rm -Rf out/target/product/phhgsi*
-rm -Rf out/target/product/phhgsi*
-rm -Rf out/target/product/phhgsi*
-rm -Rf out/target/product/phhgsi*
-
-if [ "$1" = "android-10.0" ];then
-buildVariant treble_a64_bvN-userdebug arm32_binder64-ab-vanilla-nosu
-buildVariant treble_a64_bgS-userdebug arm32_binder64-ab-gapps-su
-fi
 rm -Rf out/target/product/phhgsi*
 
 if [ "$release" == true ];then
