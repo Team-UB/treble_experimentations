@@ -7,7 +7,7 @@ if [ -z "$USER" ];then
     export USER="$(id -un)"
 fi
 export LC_ALL=C
-export GAPPS_SOURCES_PATH=vendor/gapps/
+export GAPPS_SOURCES_PATH=vendor/opengapps/sources/
 
 ## set defaults
 
@@ -20,7 +20,13 @@ elif [[ $(uname -s) = "Linux" ]];then
     jobs=$(nproc)
 fi
 
-
+## handle command line arguments
+if [[ -v build_dakkar_choice ]]
+then
+echo "Using exported choice"
+else
+read -p "Do you want to sync? (y/N) " build_dakkar_choice
+fi
 function help() {
     cat <<EOF
 Syntax:
@@ -100,7 +106,6 @@ function get_rom_type() {
             aosp81)
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
                 mainbranch="android-8.1.0_r48"
-
                 localManifestBranch="android-8.1"
                 treble_generate=""
                 extra_make_options=""
@@ -116,7 +121,7 @@ function get_rom_type() {
                 ;;
             aosp10)
                 mainrepo="https://android.googlesource.com/platform/manifest.git"
-                mainbranch="android-10.0.0_r2"
+                mainbranch="android-10.0.0_r25"
                 localManifestBranch="android-10.0"
                 treble_generate=""
                 extra_make_options=""
@@ -396,7 +401,6 @@ function clone_or_checkout() {
 
     if [[ -d "$dir" ]];then
         (
-            echo "dir is " $1 "......and repo is " $2
             cd "$dir"
             git fetch
             git reset --hard
@@ -438,7 +442,7 @@ function patch_things() {
         rm -f device/*/sepolicy/common/private/genfs_contexts
         (
             cd device/phh/treble
-    if [[ $choice == *"y"* ]];then
+    if [[ $build_dakkar_choice == *"y"* ]];then
             git clean -fdx
     fi
             bash generate.sh "$treble_generate"
@@ -476,21 +480,6 @@ function clean_build() {
     rm -rf "$OUT"
 }
 
-function build_app() {
-    #get current git log id
-    APPID=$(git -C packages/apps/treble_app log --format="%H" -n1)
-    #check previous id
-    if [[ -e  "packages/apps/treble_app/OldId" ]]; then
-        OLDID=$(cat packages/apps/treble_app/OldId)
-    else
-        OLDID="0"
-    fi
-    if [[ "$APPID" != "$OLDID" ]]; then
-        bash packages/apps/treble_app/build.sh
-        cp -f packages/apps/treble_app/app.apk vendor/hardware_overlay/TrebleApp/app.apk
-        echo "$APPID" > "packages/apps/treble_app/OldId"
-    fi
-}
 parse_options "$@"
 get_rom_type "$@"
 get_variants "$@"
@@ -510,11 +499,12 @@ if [[ $python == "3." ]]; then
 fi
 
 init_release
+if [[ $build_dakkar_choice == *"y"* ]];then
     init_main_repo
     init_local_manifest
     init_patches
     sync_repo
-build_app
+fi
 
 patch_things
 
@@ -522,9 +512,14 @@ if [[ $jack_enabled == "true" ]]; then
     jack_env
 fi
 
-read -p "Do you want to clean? (y/N) " clean
+if [[ -v build_dakkar_clean ]]
+then
+echo "Using exported clean choice"
+else
+read -p "Do you want to clean? (y/N) " build_dakkar_clean
+fi
 
-if [[ $clean == *"y"* ]];then
+if [[ $build_dakkar_clean == *"y"* ]];then
     clean_build
 fi
 

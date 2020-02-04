@@ -10,7 +10,7 @@ if [ -z "$USER" ];then
 fi
 export LC_ALL=C
 
-aosp="android-10.0.0_r25"
+aosp="android-10.0.0_r29"
 phh="TUB-10"
 
 if [ "$release" == true ];then
@@ -18,8 +18,7 @@ if [ "$release" == true ];then
     [ ! -f "$originFolder/release/config.ini" ] && exit 1
 fi
 
-
-repo init -u https://android.googlesource.com/platform/manifest -b $aosp
+repo init -u "$manifest_url" -b $aosp
 if [ -d .repo/local_manifests ] ;then
     ( cd .repo/local_manifests; git fetch; git reset --hard; git checkout origin/$phh)
 else
@@ -30,15 +29,16 @@ repo sync -c -j 1 --force-sync
 repo forall -r '.*opengapps.*' -c 'git lfs fetch && git lfs checkout'
 (cd device/phh/treble; git clean -fdx; bash generate.sh)
 (cd vendor/foss; git clean -fdx; bash update.sh)
+rm -f vendor/gapps/interfaces/wifi_ext/Android.bp
 
 . build/envsetup.sh
 
 buildVariant() {
-    lunch $1
-    make BUILD_NUMBER=$rom_fp installclean
-    make BUILD_NUMBER=$rom_fp -j8 systemimage
-    make BUILD_NUMBER=$rom_fp vndk-test-sepolicy
-	#xz -c $OUT/system.img -T0 > release/$rom_fp/system-${2}.img.xz
+	lunch $1
+	make BUILD_NUMBER=$rom_fp installclean
+	make BUILD_NUMBER=$rom_fp -j8 systemimage
+	make BUILD_NUMBER=$rom_fp vndk-test-sepolicy
+	xz -c $OUT/system.img -T0 > release/$rom_fp/system-${2}.img.xz
 }
 
 repo manifest -r > release/$rom_fp/manifest.xml

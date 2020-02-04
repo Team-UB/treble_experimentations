@@ -23,7 +23,7 @@ lunch tub_device_codename-userdebug
 mka tub -j$(nproc --all)
 
 
-Building Treble Rom for S9/S9+
+Building Treble Rom for S10/S10+/S10 5G/Note 10/Note 10+/Note 10+ 5G
 ------------------------------
 mkdir tub; cd tub
 
