@@ -6,11 +6,11 @@ mkdir -p release/$rom_fp/
 set -e
 
 if [ -z "$USER" ];then
-    export USER="$(id -un)"
+	export USER="$(id -un)"
 fi
 export LC_ALL=C
 
-aosp="android-10.0.0_r29"
+aosp="android-10.0.0_r31"
 phh="TUB-10"
 
 if [ "$release" == true ];then
